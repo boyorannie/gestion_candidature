@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Formation;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreFormationRequest;
 use App\Http\Requests\UpdateFormationRequest;
 
 class FormationController extends Controller
 {
+    public function __construct()
+{
+    $this->middleware('checkRole:admin')->only(['store', 'update', 'destroy']);
+}
     /**
      * Display a listing of the resource.
      */
@@ -29,34 +34,35 @@ class FormationController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreFormationRequest $request)
-    {
-        try {
-            $role=User::where('role','admin');
-            
-             $donneeFormationValide = $request->validated();
-             
-             $formation = new Formation($donneeFormationValide);
+{
+    try {
+        $user = Auth::user(); // Récupère l'utilisateur actuel
+        if ($user->role === 'admin') { // Vérifie si l'utilisateur a le rôle d'administrateur
+            $donneeFormationValide = $request->validated();
+            $formation = new Formation($donneeFormationValide);
      
-             if ($formation->save()) {
-                 return response()->json([
-                     
-                     "message" => "Formation ajoutée avec succès"
-                 ], 201);
-             } else {
-                 return response()->json([
-                   
-                     "message" => "Echec ajout Formation"
-                 ], 500);
-             }
-            } catch (\Throwable $th) {
-             return response()->json([
-                 "status" => 0,
-                 "messageErreur" => $th,
-             ]);
+            if ($formation->save()) {
+                return response()->json([
+                    "message" => "Formation ajoutée avec succès"
+                ], 201);
+            } else {
+                return response()->json([
+                    "message" => "Echec ajout Formation"
+                ], 500);
             }
-             
+        } else {
+            return response()->json([
+                "message" => "Accès non autorisé"
+            ], 403);
+        }
+    } catch (\Throwable $th) {
+        return response()->json([
+            "status" => 0,
+            "messageErreur" => $th,
+        ]);
     }
-    
+}
+
 
     /**
      * Display the specified resource.
@@ -78,48 +84,69 @@ class FormationController extends Controller
      * Update the specified resource in storage.
      */
     public function update(UpdateFormationRequest $request, Formation $formation)
-    {
-        $role=User::where('role','admin');
-        if($formation){
-            
-            $infoFormationValide=$request->validated();
+{
+    try {
+        $user = Auth::user(); // Récupère l'utilisateur actuel
+        if ($user->role === 'admin') { // Vérifie si l'utilisateur a le rôle d'administrateur
+            $infoFormationValide = $request->validated();
             $formation->nom = $infoFormationValide['nom'];
-            $formation->duree = $infoFormationValide['duree'] ;
-        if($formation->update()){
+            $formation->duree = $infoFormationValide['duree'];
+
+            if ($formation->save()) {
+                return response()->json([
+                    'statut' => 1,
+                    'message' => 'Formation modifiée avec succès',
+                ]);
+            } else {
+                return response()->json([
+                    'statut' => 0,
+                    'message' => 'Echec modification formation',
+                ]);
+            }
+        } else {
             return response()->json([
-                'statut'=>1,
-                'message'=> 'Formation modifiée avec succès',
-            ]);
-        }else{
-            return response()->json([
-                'statut'=>0,
-                'message'=> 'Echec modification formation',
-            ]);
+                'message' => 'Accès non autorisé'
+            ], 403);
         }
+    } catch (\Throwable $th) {
+        return response()->json([
+            'status' => 0,
+            'messageErreur' => $th,
+        ]);
     }
-    }
+}
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Formation $formation)
     {
-        $role=User::where('role','admin');
-        if($formation){
-           
-            if($formation->delete()){
-                
+        try {
+            $user = Auth::user(); // Récupère l'utilisateur actuel
+            if ($user->role === 'admin') { // Vérifie si l'utilisateur a le rôle d'administrateur
+                if ($formation->delete()) {
                     return response()->json([
-                        'statut'=>1,
-                        'message'=> 'Formation supprimée avec succès',
+                        'statut' => 1,
+                        'message' => 'Formation supprimée avec succès',
                     ]);
-                }else{
+                } else {
                     return response()->json([
-                        'statut'=>0,
-                        'message'=> 'Echec Suppression',
+                        'statut' => 0,
+                        'message' => 'Echec Suppression',
                     ]);
                 }
+            } else {
+                return response()->json([
+                    'message' => 'Accès non autorisé'
+                ], 403);
+            }
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 0,
+                'messageErreur' => $th,
+            ]);
         }
-    
     }
+    
 }
