@@ -20,11 +20,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::controller(AuthController::class)->group(function () {
-    Route::post('login', 'login');
-    Route::post('register', 'register');
-    Route::post('logout', 'logout');
-    Route::post('refresh', 'refresh');
-});
-
+// Route::controller(AuthController::class)->group(function () {
+    
+//     Route::post('registerAdmin', 'registerAdmin');
+//     // Route::post('registerCandidat', 'registerCandidat');
+//     Route::post('logout', 'logout');
+//     Route::post('refresh', 'refresh');
+// });
+Route::post('login',[AuthController::class,'login']);
+Route::post('logout',[AuthController::class,'logout']);
+Route::post('register_candidat',[AuthController::class,'registerCandidat']);
+Route::post('register_admin',[AuthController::class,'registerAdmin']);
 Route::apiResource('/formation', FormationController::class);

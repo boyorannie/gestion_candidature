@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Formation;
 use App\Http\Requests\StoreFormationRequest;
 use App\Http\Requests\UpdateFormationRequest;
@@ -30,6 +31,7 @@ class FormationController extends Controller
     public function store(StoreFormationRequest $request)
     {
         try {
+            $role=User::where('role','admin');
             
              $donneeFormationValide = $request->validated();
              
@@ -77,7 +79,24 @@ class FormationController extends Controller
      */
     public function update(UpdateFormationRequest $request, Formation $formation)
     {
-        //
+        $role=User::where('role','admin');
+        if($formation){
+            
+            $infoFormationValide=$request->validated();
+            $formation->nom = $infoFormationValide['nom'];
+            $formation->duree = $infoFormationValide['duree'] ;
+        if($formation->update()){
+            return response()->json([
+                'statut'=>1,
+                'message'=> 'Formation modifiée avec succès',
+            ]);
+        }else{
+            return response()->json([
+                'statut'=>0,
+                'message'=> 'Echec modification formation',
+            ]);
+        }
+    }
     }
 
     /**
@@ -85,6 +104,22 @@ class FormationController extends Controller
      */
     public function destroy(Formation $formation)
     {
-        //
+        $role=User::where('role','admin');
+        if($formation){
+           
+            if($formation->delete()){
+                
+                    return response()->json([
+                        'statut'=>1,
+                        'message'=> 'Formation supprimée avec succès',
+                    ]);
+                }else{
+                    return response()->json([
+                        'statut'=>0,
+                        'message'=> 'Echec Suppression',
+                    ]);
+                }
+        }
+    
     }
 }

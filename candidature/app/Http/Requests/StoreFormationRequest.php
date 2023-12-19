@@ -24,7 +24,7 @@ class StoreFormationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "nom" => ['required','string','max:255', 'min:2'],
+            "nom" => ['required','string','max:255'],
             "duree" => ['required','string'],
         ];
     }

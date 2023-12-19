@@ -19,12 +19,7 @@ class User extends Authenticatable implements JWTSubject
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'role'
-    ];
+    protected $guarded = [];
     public function Formation(): HasMany
     {
         return $this->HasMany(Formation::class);
