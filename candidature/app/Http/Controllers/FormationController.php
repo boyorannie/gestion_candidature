@@ -29,8 +29,32 @@ class FormationController extends Controller
      */
     public function store(StoreFormationRequest $request)
     {
-        //
+        try {
+            
+             $donneeFormationValide = $request->validated();
+             
+             $formation = new Formation($donneeFormationValide);
+     
+             if ($formation->save()) {
+                 return response()->json([
+                     
+                     "message" => "Formation ajoutée avec succès"
+                 ], 201);
+             } else {
+                 return response()->json([
+                   
+                     "message" => "Echec ajout Formation"
+                 ], 500);
+             }
+            } catch (\Throwable $th) {
+             return response()->json([
+                 "status" => 0,
+                 "messageErreur" => $th,
+             ]);
+            }
+             
     }
+    
 
     /**
      * Display the specified resource.
