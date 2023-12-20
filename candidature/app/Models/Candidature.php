@@ -8,18 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Candidature extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'statut',
-        
+    protected $guarded = [
+        'id'
     ];
 
-    public function Utilisateurs()
+    public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(User::class);
     }
-    public function Formation()
+    public function formations()
     {
-        return $this->belongsTo(Formation::class);
+        return $this->belongsToMany(Formation::class);
     }
     
 

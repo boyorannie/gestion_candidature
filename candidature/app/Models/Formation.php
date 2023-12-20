@@ -9,18 +9,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Formation extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'nom',
-        'duree',
-    ];
-
-    public function Utilisateurs(): HasMany
+    protected $guarded = [];
+    public function candidatures()
     {
-        return $this->HasMany(User::class);
-    }
-    public function Candidature(): HasMany
-    {
-        return $this->HasMany(Candidature::class);
+        return $this->hasMany(Candidature::class);
     }
     
 

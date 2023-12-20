@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_user');
             $table->unsignedBigInteger('id_formation');
-            $table->enum('statut',['acceptée','refusée']);
+            $table->enum('statut',['acceptée','refusée'])->default('acceptée');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('id_formation')->references('id')->on('formations')->onDelete('cascade');
            $table->timestamps();
