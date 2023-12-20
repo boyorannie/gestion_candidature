@@ -1,0 +1,349 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API GESTION_CANDIDATURE",
+        "description": "Il s'agit d'une api qui gère les candidatures aux formations Simplon Sénégal",
+        "version": "1.0"
+    },
+    "components": {
+        "securitySchemes": {
+        "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+        }
+        }
+        },
+        "security": [
+        {
+        "bearerAuth": []
+        }
+        ],
+        
+    "consumes": [
+        "application/json"
+    ],
+    "paths": {
+        "/api/listeAcceptes": {
+            "post": {
+                "summary": "listeAcceptes",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "examples": {
+                            "application/json": ""
+                        }
+                    }
+                },
+                "tags": [
+                    "API/gestion_candidatures"
+                ],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "User-Agent",
+                        "type": "string"
+                    },
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "/api/listeRefuses": {
+            "post": {
+                "summary": "listeRefuses",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "examples": {
+                            "application/json": ""
+                        }
+                    }
+                },
+                "tags": [
+                    "API/gestion_candidatures"
+                ],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "User-Agent",
+                        "type": "string"
+                    },
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "/api/liste": {
+            "post": {
+                "summary": "ListeCandidatures",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "examples": {
+                            "application/json": ""
+                        }
+                    }
+                },
+                "tags": [
+                    "API/gestion_candidatures"
+                ],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "User-Agent",
+                        "type": "string"
+                    },
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "/api/refuser/2": {
+            "put": {
+                "summary": "refuserCandidature",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "examples": {
+                            "application/json": ""
+                        }
+                    }
+                },
+                "tags": [
+                    "API/gestion_candidatures"
+                ],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "User-Agent",
+                        "type": "string"
+                    },
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "/api/formation/1": {
+            "put": {
+                "summary": "ModifierFormation",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "examples": {
+                            "application/json": ""
+                        }
+                    }
+                },
+                "tags": [
+                    "API/gestion_candidatures"
+                ],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "User-Agent",
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "/api/register_candidat": {
+            "post": {
+                "summary": "registerCandidat",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "examples": {
+                            "application/json": ""
+                        }
+                    }
+                },
+                "tags": [
+                    "API/gestion_candidatures"
+                ],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "User-Agent",
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "/api/formation/3": {
+            "delete": {
+                "summary": "SupprimerFormation",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "examples": {
+                            "application/json": ""
+                        }
+                    }
+                },
+                "tags": [
+                    "API/gestion_candidatures"
+                ],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "User-Agent",
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "/api/formation": {
+            "post": {
+                "summary": "Ajout Formation",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "examples": {
+                            "application/json": ""
+                        }
+                    }
+                },
+                "tags": [
+                    "API/gestion_candidatures"
+                ],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "User-Agent",
+                        "type": "string"
+                    },
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "summary": "Logout",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "examples": {
+                            "application/json": ""
+                        }
+                    }
+                },
+                "tags": [
+                    "API/gestion_candidatures"
+                ],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "User-Agent",
+                        "type": "string"
+                    },
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "/api/register_admin": {
+            "post": {
+                "summary": "RegisterAdmin",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "examples": {
+                            "application/json": ""
+                        }
+                    }
+                },
+                "tags": [
+                    "API/gestion_candidatures"
+                ],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "User-Agent",
+                        "type": "string"
+                    }
+                ]
+            }
+        },
+        "/api/login": {
+            "post": {
+                "summary": "Login",
+                "description": "",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "examples": {
+                            "application/json": ""
+                        }
+                    }
+                },
+                "tags": [
+                    "API/gestion_candidatures"
+                ],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "User-Agent",
+                        "type": "string"
+                    },
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "type": "string"
+                    }
+                ]
+            }
+        }
+    }
+}
