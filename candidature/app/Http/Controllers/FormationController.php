@@ -13,7 +13,7 @@ class FormationController extends Controller
     public function __construct()
 {
     $this->middleware('checkRole:admin')->only(['store', 'update', 'destroy']);
-    $this->middleware('auth.candidate')->only('postuler');
+    $this->middleware('auth.candidate')->only(['postuler', 'listeFormation']);
 }
     /**
      * Display a listing of the resource.
@@ -37,8 +37,8 @@ class FormationController extends Controller
     public function store(StoreFormationRequest $request)
 {
     try {
-        $user = Auth::user(); // Récupère l'utilisateur actuel
-        if ($user->role === 'admin') { // Vérifie si l'utilisateur a le rôle d'administrateur
+        $user = Auth::user(); 
+        if ($user->role === 'admin') { 
             $donneeFormationValide = $request->validated();
             $formation = new Formation($donneeFormationValide);
      
@@ -87,8 +87,8 @@ class FormationController extends Controller
     public function update(UpdateFormationRequest $request, Formation $formation)
 {
     try {
-        $user = Auth::user(); // Récupère l'utilisateur actuel
-        if ($user->role === 'admin') { // Vérifie si l'utilisateur a le rôle d'administrateur
+        $user = Auth::user(); 
+        if ($user->role === 'admin') { 
             $infoFormationValide = $request->validated();
             $formation->nom = $infoFormationValide['nom'];
             $formation->duree = $infoFormationValide['duree'];
@@ -124,8 +124,8 @@ class FormationController extends Controller
     public function destroy(Formation $formation)
     {
         try {
-            $user = Auth::user(); // Récupère l'utilisateur actuel
-            if ($user->role === 'admin') { // Vérifie si l'utilisateur a le rôle d'administrateur
+            $user = Auth::user(); 
+            if ($user->role === 'admin') { 
                 if ($formation->delete()) {
                     return response()->json([
                         'statut' => 1,
@@ -150,4 +150,12 @@ class FormationController extends Controller
         }
     }
     
+    public function listeFormation()
+    {
+        $candidature = Formation::all();
+        return response()->json([
+            'Liste Formations'=>$candidature,
+            
+        ]);
+}
 }

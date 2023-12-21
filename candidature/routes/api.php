@@ -36,12 +36,15 @@ Route::apiResource('/formation', FormationController::class);
 
 Route::middleware(['auth:api', 'acces:candidat'])->group(function (){
     Route::post('candidature', [CandidatureController::class,'postuler']);
+    Route::get('listeFormation', [CandidatureController::class,'listeFormation']);
 });
 
 Route::middleware(['auth:api', 'acces:admin'])->group(function (){
+  
     Route::put('accepter/{id}', [CandidatureController::class, 'Accepter']);
     Route::put('refuser/{id}', [CandidatureController::class, 'Refuser']);
     Route::post('liste', [CandidatureController::class, 'listeCandidatures']);
     Route::post('listeAcceptes', [CandidatureController::class, 'ListeAcceptes']);
+    Route::post('listeRefuses', [CandidatureController::class, 'ListeRefuses']);
     Route::post('listeRefuses', [CandidatureController::class, 'ListeRefuses']);
 });
