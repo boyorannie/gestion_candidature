@@ -13,7 +13,7 @@ class FormationController extends Controller
     public function __construct()
 {
     $this->middleware('checkRole:admin')->only(['store', 'update', 'destroy']);
-    $this->middleware('auth.candidate')->only(['postuler', 'listeFormation']);
+    $this->middleware('auth.candidate')->only(['postuler']);
 }
     /**
      * Display a listing of the resource.
