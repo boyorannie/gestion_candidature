@@ -101,4 +101,14 @@ class AuthController extends Controller
             ]
         ]);
     }
+    public function listeCandidats()
+{
+    
+    $candidats = User::where('role', 'candidat')->get();
+
+    return response()->json([
+        'Liste Candidats' => $candidats,
+    ]);
+}
+
 }

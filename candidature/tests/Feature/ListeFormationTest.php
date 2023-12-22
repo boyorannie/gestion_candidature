@@ -14,7 +14,8 @@ class ListeFormationTest extends TestCase
     public function test_example(): void
     {
         $response = $this->get('/api/listeFormation');
-
+        $responseContent = $response->getContent();
+        var_dump(json_decode($responseContent, true));
         $response->assertStatus(200);
     }
 }

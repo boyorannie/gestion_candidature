@@ -41,6 +41,7 @@ Route::middleware(['auth:api', 'acces:admin'])->group(function (){
     Route::get('liste', [CandidatureController::class, 'listeCandidatures']);
     Route::get('listeAcceptes', [CandidatureController::class, 'ListeAcceptes']);
     Route::get('listeRefuses', [CandidatureController::class, 'ListeRefuses']);
+    Route::get('listeCandidats', [AuthController::class, 'listeCandidats']);
     
   
 });
